@@ -23,12 +23,12 @@ CREATE TABLE carga (
 );
 
 CREATE TABLE transporta (
-    fk_veiculo_codvei int FOREIGN KEY REFERENCES carga (codcar),
-    fk_carga_codcar int FOREIGN KEY REFERENCES veiculo (codvei),
-    codtra int PRIMARY KEY,
-    nometra varchar(50),
-    distanciatra numeric(6,2),
-    vlrtottra numeric(12,3)
+    fk_carga_codcar int FOREIGN KEY REFERENCES carga (codcar),
+    fk_veiculo_codvei int FOREIGN KEY REFERENCES veiculo (codvei),
+    codtrans int PRIMARY KEY,
+    nometrans varchar(50) not null,
+    distanciatrans numeric(10,2) not null,
+    valortotal numeric(10,2) not null
 );
 
 SELECT * FROM veiculo
@@ -42,10 +42,10 @@ INSERT INTO carga VALUES (87, 'MILHO', 'ALIMENTOS', 3.100, 10.000);
 INSERT INTO carga VALUES (11, 'ARVORES', 'CARGA SECA', 4.500, 21.000);
 
 SELECT * FROM transporta
-INSERT INTO transporta VALUES (87, 7, 55, 'OURO BRANCO', 1200.00, 15.000);
-INSERT INTO transporta VALUES (26, 5, 16, 'COLOMBO', 900.00, 13.000);
-INSERT INTO transporta VALUES (11, 15, 12, 'GAVIÕES', 1500.00, 25.000);
+INSERT INTO transporta values (87, 7, 55, 'OURO BRANCO', 1200.00, 15.000); 
+INSERT INTO transporta values (26, 5, 16, 'COLOMBO', 900.00, 13.000); 
+INSERT INTO transporta values (11, 15, 12, 'GAVIÕES', 1500.00, 25.000); 
 
-select ve.nomevei, tr.nometra, ca.nomecar from veiculo ve
-inner join transporta tr on ve.codvei = tr.fk_veiculo_codvei
-inner join carga ca on ca.codcar = tr.fk_carga_codcar
+select vei.nomevei, trans.nometrans, carg.nomecar from veiculo vei
+inner join transporta trans on vei.codvei = trans.fk_veiculo_codvei
+inner join carga carg on carg.codcar = trans.fk_carga_codcar;
